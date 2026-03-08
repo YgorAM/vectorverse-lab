@@ -6,6 +6,8 @@ import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
 import { CheckCircle2, XCircle, Zap, Trophy, Trash2, RotateCcw } from "lucide-react";
 import { useBestScore } from "@/hooks/useBestScore";
+import { GameTutorial, shouldShowTutorial } from "@/components/GameTutorial";
+import { GameHint } from "@/components/GameHint";
 
 interface Challenge {
   type: string;
@@ -42,6 +44,7 @@ export default function MiniGame() {
   const { bestScore, playerName, submitScore, setPlayerName, reset: resetBest } = useBestScore("game");
   const challenges = useMemo(() => generateChallenges(t), [t]);
 
+  const [showTutorial, setShowTutorial] = useState(() => shouldShowTutorial());
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const [checked, setChecked] = useState(false);
@@ -64,7 +67,6 @@ export default function MiniGame() {
     if (correct) {
       setScore(s => {
         let pts = POINTS_PER_CORRECT;
-        // Check if this completes a level
         const isLastInLevel = currentIndex === challenges.length - 1 || challenges[currentIndex + 1]?.level !== currentLevel;
         if (isLastInLevel && !levelCompleted.has(currentLevel)) {
           pts += LEVEL_BONUS;
@@ -106,6 +108,10 @@ export default function MiniGame() {
   const handleSaveName = () => {
     setPlayerName(nameInput.trim());
   };
+
+  if (showTutorial) {
+    return <GameTutorial onStart={() => setShowTutorial(false)} />;
+  }
 
   if (finished) {
     return (
@@ -161,7 +167,6 @@ export default function MiniGame() {
         <p className="text-muted-foreground mb-4">{t("game_subtitle")}</p>
       </motion.div>
 
-      {/* Best score banner */}
       {bestScore > 0 && (
         <div className="flex items-center gap-2 text-sm font-mono text-muted-foreground mb-4">
           <Trophy className="text-yellow-400" size={14} />
@@ -169,7 +174,6 @@ export default function MiniGame() {
         </div>
       )}
 
-      {/* Stats bar */}
       <div className="flex items-center gap-4 mb-4">
         <div className="flex items-center gap-1 text-sm text-primary font-mono">
           <Zap size={14} /> {score} {t("game_pts")}
@@ -187,6 +191,9 @@ export default function MiniGame() {
             </span>
             <pre className="font-mono text-lg text-foreground">{c.question}</pre>
           </div>
+
+          {/* Guided hints for first 3 questions */}
+          {!checked && <GameHint challengeIndex={currentIndex} questionType={c.type} />}
 
           <div className="flex gap-2 mb-4">
             <Input
