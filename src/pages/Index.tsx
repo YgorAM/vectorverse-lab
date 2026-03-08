@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Grid3X3, Gamepad2, Terminal, BookOpen, GraduationCap, Trophy, Sparkles } from "lucide-react";
+import { ArrowRight, Grid3X3, Gamepad2, Terminal, BookOpen, GraduationCap, Trophy, Sparkles, User, ExternalLink, Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 
