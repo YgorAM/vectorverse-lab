@@ -478,4 +478,20 @@ export const ptBR: Record<string, string> = {
   about_portfolio: "Ver Portfólio",
   about_linkedin: "Perfil no LinkedIn",
   about_built_by: "Criado por Ygor Amaral",
+
+  // About Page
+  nav_about: "Sobre o Projeto",
+  about_page_title: "Sobre o Projeto",
+  about_page_subtitle: "Saiba por que este site existe, como foi construído e quais ferramentas o alimentam.",
+  about_why_title: "Por Que Este Site Existe",
+  about_why_text: "Este site foi criado para ajudar estudantes a entender melhor vetores e matrizes, que são conceitos fundamentais da álgebra linear.\n\nMuitos estudantes têm dificuldade com esses tópicos porque podem parecer abstratos e difíceis de visualizar. O objetivo deste projeto é tornar o aprendizado mais interativo e intuitivo, combinando explicações, exemplos e um mini-game onde os usuários podem praticar a resolução de problemas.\n\nEm vez de apenas ler teoria, os usuários podem testar ativamente seus conhecimentos e aprender passo a passo.",
+  about_how_title: "Como Este Projeto Foi Criado",
+  about_how_text: "Este projeto foi construído usando ferramentas modernas de desenvolvimento assistido por IA.\n\nA estrutura do site foi criada usando Lovable.\n\nO ChatGPT foi usado para ajudar a gerar ideias, projetar a mecânica do mini-game e melhorar a experiência de aprendizado.\n\nO criador do projeto foi responsável pelo conceito, decisões de design e estrutura educacional do site.",
+  about_stack_title: "Tecnologias Utilizadas",
+  about_stack_lovable: "Construtor de sites e estrutura",
+  about_stack_chatgpt: "Assistência de IA para ideias e mecânicas do jogo",
+  about_stack_js: "Lógica do mini game",
+  about_stack_css: "Estilização e design da interface",
+  about_goal_title: "Objetivo do Projeto",
+  about_goal_text: "O objetivo deste site é tornar o aprendizado de álgebra linear mais acessível e envolvente.\n\nAo combinar explicações interativas com um pequeno sistema de jogo, o site incentiva os estudantes a praticar e entender conceitos em vez de apenas memorizar fórmulas.",
 };

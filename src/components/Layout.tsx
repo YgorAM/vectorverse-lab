@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { Home, ArrowRight, Grid3X3, Gamepad2, Terminal, BookOpen, Menu, X, GraduationCap, Trophy, Sparkles } from "lucide-react";
+import { Home, ArrowRight, Grid3X3, Gamepad2, Terminal, BookOpen, Menu, X, GraduationCap, Trophy, Sparkles, Info } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import LanguageSelector from "./LanguageSelector";
 
@@ -14,6 +14,7 @@ const navItems = [
   { to: "/playground", labelKey: "nav_playground", icon: Gamepad2 },
   { to: "/console", labelKey: "nav_console", icon: Terminal },
   { to: "/examples", labelKey: "nav_examples", icon: BookOpen },
+  { to: "/about", labelKey: "nav_about", icon: Info },
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
