@@ -180,8 +180,12 @@ export default function MiniGame() {
   const handleSelectLevel = (lv: GameDifficulty) => {
     setDifficulty(lv);
     saveLastLevel(lv);
-    setGameStarted(true);
-    startTimeRef.current = Date.now();
+    if (shouldShowTutorial()) {
+      setPhase("tutorial");
+    } else {
+      setPhase("playing");
+      startTimeRef.current = Date.now();
+    }
     // Reset game state
     setCurrentIndex(0);
     setUserAnswer("");
@@ -192,7 +196,6 @@ export default function MiniGame() {
     setHintsUsed(0);
     setTotalHintsUsed(0);
     setCorrectCount(0);
-    setFinished(false);
     setIsNewRecord(false);
   };
 
