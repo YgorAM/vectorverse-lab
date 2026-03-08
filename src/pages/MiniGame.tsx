@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { CheckCircle2, XCircle, Zap, Trophy, Trash2, RotateCcw } from "lucide-react";
 import { useBestScore } from "@/hooks/useBestScore";
 import { GameTutorial, shouldShowTutorial } from "@/components/GameTutorial";
-import { GameHint } from "@/components/GameHint";
+import { GameHintButton } from "@/components/GameHint";
 
 interface Challenge {
   type: string;
@@ -15,20 +15,21 @@ interface Challenge {
   answer: string;
   explanation: string;
   level: number;
+  hintKeys: [string, string, string];
 }
 
 function generateChallenges(t: (k: string) => string): Challenge[] {
   return [
-    { type: t("game_type_vec_add"), question: "[1, 2] + [3, 4] = ?", answer: "[4, 6]", explanation: "[1+3, 2+4] = [4, 6]", level: 1 },
-    { type: t("game_type_vec_add"), question: "[5, 0] + [0, 3] = ?", answer: "[5, 3]", explanation: "[5+0, 0+3] = [5, 3]", level: 1 },
-    { type: t("game_type_scalar"), question: "2 × [3, 5] = ?", answer: "[6, 10]", explanation: "[2×3, 2×5] = [6, 10]", level: 1 },
-    { type: t("game_type_scalar"), question: "3 × [1, 4] = ?", answer: "[3, 12]", explanation: "[3×1, 3×4] = [3, 12]", level: 2 },
-    { type: t("game_type_dot"), question: "[1, 2] · [3, 4] = ?", answer: "11", explanation: "1×3 + 2×4 = 3 + 8 = 11", level: 2 },
-    { type: t("game_type_dot"), question: "[2, 0] · [0, 5] = ?", answer: "0", explanation: "2×0 + 0×5 = 0", level: 2 },
-    { type: t("game_type_mat_add"), question: "[[1, 0], [0, 1]] + [[1, 1], [1, 1]] = ?", answer: "[[2, 1], [1, 2]]", explanation: "[[1+1, 0+1], [0+1, 1+1]]", level: 3 },
-    { type: t("game_type_mat_add"), question: "[[2, 3], [4, 5]] + [[1, 1], [1, 1]] = ?", answer: "[[3, 4], [5, 6]]", explanation: "[[2+1, 3+1], [4+1, 5+1]]", level: 3 },
-    { type: t("game_type_mat_mul"), question: "[[1, 0], [0, 1]] × [[5, 6], [7, 8]] = ?", answer: "[[5, 6], [7, 8]]", explanation: t("game_identity_exp"), level: 4 },
-    { type: t("game_type_mat_mul"), question: "[[1, 2], [0, 1]] × [[1, 0], [1, 1]] = ?", answer: "[[3, 2], [1, 1]]", explanation: "[[1×1+2×1, 1×0+2×1], [0×1+1×1, 0×0+1×1]]", level: 4 },
+    { type: t("game_type_vec_add"), question: "[1, 2] + [3, 4] = ?", answer: "[4, 6]", explanation: "[1+3, 2+4] = [4, 6]", level: 1, hintKeys: ["ch0_h1", "ch0_h2", "ch0_h3"] },
+    { type: t("game_type_vec_add"), question: "[5, 0] + [0, 3] = ?", answer: "[5, 3]", explanation: "[5+0, 0+3] = [5, 3]", level: 1, hintKeys: ["ch1_h1", "ch1_h2", "ch1_h3"] },
+    { type: t("game_type_scalar"), question: "2 × [3, 5] = ?", answer: "[6, 10]", explanation: "[2×3, 2×5] = [6, 10]", level: 1, hintKeys: ["ch2_h1", "ch2_h2", "ch2_h3"] },
+    { type: t("game_type_scalar"), question: "3 × [1, 4] = ?", answer: "[3, 12]", explanation: "[3×1, 3×4] = [3, 12]", level: 2, hintKeys: ["ch3_h1", "ch3_h2", "ch3_h3"] },
+    { type: t("game_type_dot"), question: "[1, 2] · [3, 4] = ?", answer: "11", explanation: "1×3 + 2×4 = 3 + 8 = 11", level: 2, hintKeys: ["ch4_h1", "ch4_h2", "ch4_h3"] },
+    { type: t("game_type_dot"), question: "[2, 0] · [0, 5] = ?", answer: "0", explanation: "2×0 + 0×5 = 0", level: 2, hintKeys: ["ch5_h1", "ch5_h2", "ch5_h3"] },
+    { type: t("game_type_mat_add"), question: "[[1, 0], [0, 1]] + [[1, 1], [1, 1]] = ?", answer: "[[2, 1], [1, 2]]", explanation: "[[1+1, 0+1], [0+1, 1+1]]", level: 3, hintKeys: ["ch6_h1", "ch6_h2", "ch6_h3"] },
+    { type: t("game_type_mat_add"), question: "[[2, 3], [4, 5]] + [[1, 1], [1, 1]] = ?", answer: "[[3, 4], [5, 6]]", explanation: "[[2+1, 3+1], [4+1, 5+1]]", level: 3, hintKeys: ["ch7_h1", "ch7_h2", "ch7_h3"] },
+    { type: t("game_type_mat_mul"), question: "[[1, 0], [0, 1]] × [[5, 6], [7, 8]] = ?", answer: "[[5, 6], [7, 8]]", explanation: t("game_identity_exp"), level: 4, hintKeys: ["ch8_h1", "ch8_h2", "ch8_h3"] },
+    { type: t("game_type_mat_mul"), question: "[[1, 2], [0, 1]] × [[1, 0], [1, 1]] = ?", answer: "[[3, 2], [1, 1]]", explanation: "[[1×1+2×1, 1×0+2×1], [0×1+1×1, 0×0+1×1]]", level: 4, hintKeys: ["ch9_h1", "ch9_h2", "ch9_h3"] },
   ];
 }
 
@@ -36,7 +37,7 @@ function normalize(s: string): string {
   return s.replace(/\s/g, "");
 }
 
-const POINTS_PER_CORRECT = 10;
+const SCORE_BY_HINTS = [30, 25, 18, 13];
 const LEVEL_BONUS = 5;
 
 export default function MiniGame() {
@@ -50,6 +51,8 @@ export default function MiniGame() {
   const [checked, setChecked] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [score, setScore] = useState(0);
+  const [lastPoints, setLastPoints] = useState(0);
+  const [hintsUsed, setHintsUsed] = useState(0);
   const [finished, setFinished] = useState(false);
   const [nameInput, setNameInput] = useState(playerName);
   const [isNewRecord, setIsNewRecord] = useState(false);
@@ -59,29 +62,42 @@ export default function MiniGame() {
   const currentLevel = c.level;
   const progress = (currentIndex / challenges.length) * 100;
 
+  const currentHints = useMemo(() =>
+    c.hintKeys.map(k => t(k)),
+    [c.hintKeys, t]
+  );
+
   const handleCheck = useCallback(() => {
     if (!userAnswer.trim()) return;
     const correct = normalize(userAnswer) === normalize(c.answer);
     setIsCorrect(correct);
     setChecked(true);
     if (correct) {
-      setScore(s => {
-        let pts = POINTS_PER_CORRECT;
-        const isLastInLevel = currentIndex === challenges.length - 1 || challenges[currentIndex + 1]?.level !== currentLevel;
-        if (isLastInLevel && !levelCompleted.has(currentLevel)) {
-          pts += LEVEL_BONUS;
-          setLevelCompleted(prev => new Set(prev).add(currentLevel));
-        }
-        return s + pts;
-      });
+      const pts = SCORE_BY_HINTS[Math.min(hintsUsed, SCORE_BY_HINTS.length - 1)];
+      let bonus = 0;
+      const isLastInLevel = currentIndex === challenges.length - 1 || challenges[currentIndex + 1]?.level !== currentLevel;
+      if (isLastInLevel && !levelCompleted.has(currentLevel)) {
+        bonus = LEVEL_BONUS;
+        setLevelCompleted(prev => new Set(prev).add(currentLevel));
+      }
+      setLastPoints(pts + bonus);
+      setScore(s => s + pts + bonus);
+    } else {
+      setLastPoints(0);
     }
-  }, [userAnswer, c.answer, currentLevel, currentIndex, challenges, levelCompleted]);
+  }, [userAnswer, c.answer, hintsUsed, currentLevel, currentIndex, challenges, levelCompleted]);
+
+  const handleRevealHint = useCallback(() => {
+    setHintsUsed(h => Math.min(h + 1, 3));
+  }, []);
 
   const handleNext = () => {
     if (currentIndex < challenges.length - 1) {
       setCurrentIndex(i => i + 1);
       setUserAnswer("");
       setChecked(false);
+      setHintsUsed(0);
+      setLastPoints(0);
     } else {
       setFinished(true);
     }
@@ -100,6 +116,8 @@ export default function MiniGame() {
     setChecked(false);
     setIsCorrect(false);
     setScore(0);
+    setLastPoints(0);
+    setHintsUsed(0);
     setFinished(false);
     setIsNewRecord(false);
     setLevelCompleted(new Set());
@@ -159,6 +177,10 @@ export default function MiniGame() {
     );
   }
 
+  const hintFeedback = hintsUsed > 0
+    ? ` (${hintsUsed} ${hintsUsed === 1 ? t("game_hint_single") : t("game_hint_plural")})`
+    : "";
+
   return (
     <div>
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
@@ -192,8 +214,13 @@ export default function MiniGame() {
             <pre className="font-mono text-lg text-foreground">{c.question}</pre>
           </div>
 
-          {/* Guided hints for first 3 questions */}
-          {!checked && <GameHint challengeIndex={currentIndex} questionType={c.type} />}
+          {/* Interactive hint system */}
+          <GameHintButton
+            hints={currentHints}
+            revealedCount={hintsUsed}
+            onRevealNext={handleRevealHint}
+            disabled={checked}
+          />
 
           <div className="flex gap-2 mb-4">
             <Input
@@ -217,7 +244,10 @@ export default function MiniGame() {
                 {isCorrect ? <CheckCircle2 className="text-green-400 mt-0.5" size={18} /> : <XCircle className="text-red-400 mt-0.5" size={18} />}
                 <div>
                   <p className={`font-medium text-sm ${isCorrect ? "text-green-400" : "text-red-400"}`}>
-                    {isCorrect ? t("game_right") : t("game_wrong")}
+                    {isCorrect
+                      ? `${t("game_right")} +${lastPoints} ${t("game_pts")}${hintFeedback}`
+                      : t("game_wrong")
+                    }
                   </p>
                   {!isCorrect && <p className="text-xs text-muted-foreground mt-1">{t("game_answer")}: <span className="font-mono text-foreground">{c.answer}</span></p>}
                   <p className="text-xs text-muted-foreground mt-1">{c.explanation}</p>
