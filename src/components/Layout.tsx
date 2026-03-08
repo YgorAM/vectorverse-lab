@@ -1,28 +1,34 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Home, ArrowRight, Grid3X3, Gamepad2, Terminal, BookOpen, Menu, X } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import LanguageSelector from "./LanguageSelector";
 
 const navItems = [
-  { to: "/", label: "Home", icon: Home },
-  { to: "/vectors", label: "Vectors", icon: ArrowRight },
-  { to: "/matrices", label: "Matrices", icon: Grid3X3 },
-  { to: "/playground", label: "Playground", icon: Gamepad2 },
-  { to: "/console", label: "Code Console", icon: Terminal },
-  { to: "/examples", label: "Examples", icon: BookOpen },
+  { to: "/", labelKey: "nav_home", icon: Home },
+  { to: "/vectors", labelKey: "nav_vectors", icon: ArrowRight },
+  { to: "/matrices", labelKey: "nav_matrices", icon: Grid3X3 },
+  { to: "/playground", labelKey: "nav_playground", icon: Gamepad2 },
+  { to: "/console", labelKey: "nav_console", icon: Terminal },
+  { to: "/examples", labelKey: "nav_examples", icon: BookOpen },
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { t } = useI18n();
 
   return (
     <div className="flex min-h-screen">
       {/* Mobile header */}
       <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between border-b border-border bg-background/95 backdrop-blur px-4 py-3 lg:hidden">
         <span className="font-mono text-sm font-bold text-primary">LinAlg<span className="text-foreground">.dev</span></span>
-        <button onClick={() => setMobileOpen(!mobileOpen)} className="text-muted-foreground">
-          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        <div className="flex items-center gap-2">
+          <LanguageSelector />
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="text-muted-foreground">
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
 
       {/* Sidebar */}
@@ -33,11 +39,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         ${mobileOpen ? "translate-x-0" : "-translate-x-full"}
       `}>
         <div className="px-6 py-6 border-b border-border">
-          <span className="font-mono text-lg font-bold text-primary">LinAlg<span className="text-foreground">.dev</span></span>
-          <p className="text-xs text-muted-foreground mt-1">Linear Algebra for Developers</p>
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-lg font-bold text-primary">LinAlg<span className="text-foreground">.dev</span></span>
+          </div>
+          <p className="text-xs text-muted-foreground mt-1">{t("nav_subtitle")}</p>
+          <div className="mt-3 hidden lg:block">
+            <LanguageSelector />
+          </div>
         </div>
         <nav className="flex-1 px-3 py-4 space-y-1">
-          {navItems.map(({ to, label, icon: Icon }) => (
+          {navItems.map(({ to, labelKey, icon: Icon }) => (
             <NavLink
               key={to}
               to={to}
@@ -52,12 +63,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               }}
             >
               <Icon size={16} />
-              {label}
+              {t(labelKey)}
             </NavLink>
           ))}
         </nav>
         <div className="px-6 py-4 border-t border-border">
-          <p className="text-xs text-muted-foreground">Built for learners 🚀</p>
+          <p className="text-xs text-muted-foreground">{t("nav_footer")}</p>
         </div>
       </aside>
 
