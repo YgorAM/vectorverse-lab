@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import { en } from "@/locales/en";
 import { ptBR } from "@/locales/pt-BR";
+import { useDeviceType, type DeviceType } from "@/hooks/useDeviceType";
 
 export type Locale = "en" | "pt-BR";
 
@@ -12,6 +13,8 @@ interface I18nContextType {
   locale: Locale;
   setLocale: (l: Locale) => void;
   t: (key: string) => string;
+  td: (key: string) => string;
+  deviceType: DeviceType;
 }
 
 const I18nContext = createContext<I18nContextType | null>(null);
@@ -26,6 +29,7 @@ function detectLocale(): Locale {
 
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(detectLocale);
+  const deviceType = useDeviceType();
 
   const setLocale = (l: Locale) => {
     setLocaleState(l);
@@ -40,8 +44,18 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     return translationsMap[locale]?.[key] ?? translationsMap.en[key] ?? key;
   };
 
+  /** Device-aware translation: tries key_mobile / key_tablet first, falls back to base key */
+  const td = (key: string): string => {
+    if (deviceType !== "desktop") {
+      const suffixed = `${key}_${deviceType}`;
+      const val = translationsMap[locale]?.[suffixed] ?? translationsMap.en[suffixed];
+      if (val) return val;
+    }
+    return t(key);
+  };
+
   return (
-    <I18nContext.Provider value={{ locale, setLocale, t }}>
+    <I18nContext.Provider value={{ locale, setLocale, t, td, deviceType }}>
       {children}
     </I18nContext.Provider>
   );
