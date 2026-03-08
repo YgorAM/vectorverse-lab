@@ -70,8 +70,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </NavLink>
           ))}
         </nav>
-        <div className="px-6 py-4 border-t border-border">
+        <div className="px-6 py-4 border-t border-border space-y-1">
           <p className="text-xs text-muted-foreground">{t("nav_footer")}</p>
+          <p className="text-xs text-muted-foreground/70">{t("about_built_by")}</p>
         </div>
       </aside>
 
