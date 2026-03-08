@@ -38,7 +38,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <aside className={`
         fixed inset-y-0 left-0 z-40 w-64 border-r border-border bg-sidebar flex flex-col
         transition-transform duration-200
-        lg:translate-x-0 lg:static
+        lg:translate-x-0 lg:sticky lg:top-0 lg:h-screen lg:shrink-0
         ${mobileOpen ? "translate-x-0" : "-translate-x-full"}
       `}>
         <div className="px-6 py-6 border-b border-border">
