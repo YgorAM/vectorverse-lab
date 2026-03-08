@@ -69,11 +69,11 @@ export const en: Record<string, string> = {
   vexp_dp_step5: "Sum the products: 6 + 20 = 26",
 
   // Home
-  home_comment: "// welcome",
-  home_title_1: "Linear Algebra",
-  home_title_2: "for Developers",
-  home_desc: "Master vectors and matrices — the math behind game engines, 3D graphics, machine learning, and data science. Interactive examples, live code, and visual explanations.",
-  home_explore: "Explore",
+  home_comment: "// welcome to matrix academy",
+  home_title_1: "Mathematics for Programmers —",
+  home_title_2: "Interactive Math Tools",
+  home_desc: "Master vectors and matrices — the math behind game engines, 3D graphics, machine learning, and data science. Interactive tools, live code, and visual explanations for developers and computer science students.",
+  home_explore: "Interactive Math Tools",
   home_sec_fundamentals: "Fundamentals",
   home_sec_fundamentals_desc: "Start from zero — indexes, vectors, matrices",
   home_sec_vectors: "Vectors",
