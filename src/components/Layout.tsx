@@ -14,6 +14,7 @@ const navItems = [
   { to: "/playground", labelKey: "nav_playground", icon: Gamepad2 },
   { to: "/console", labelKey: "nav_console", icon: Terminal },
   { to: "/examples", labelKey: "nav_examples", icon: BookOpen },
+  { to: "/about", labelKey: "nav_about", icon: Info },
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {

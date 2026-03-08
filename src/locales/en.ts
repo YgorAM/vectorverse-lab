@@ -478,4 +478,20 @@ export const en: Record<string, string> = {
   about_portfolio: "Visit Portfolio",
   about_linkedin: "LinkedIn Profile",
   about_built_by: "Built by Ygor Amaral",
+
+  // About Page
+  nav_about: "About the Project",
+  about_page_title: "About the Project",
+  about_page_subtitle: "Learn why this site exists, how it was built, and what tools power it.",
+  about_why_title: "Why This Site Exists",
+  about_why_text: "This website was created to help students better understand vectors and matrices, which are fundamental concepts in linear algebra.\n\nMany students struggle with these topics because they can feel abstract and difficult to visualize. The goal of this project is to make learning more interactive and intuitive by combining explanations, examples, and a mini-game where users can practice solving problems.\n\nInstead of only reading theory, users can actively test their knowledge and learn step by step.",
+  about_how_title: "How This Project Was Built",
+  about_how_text: "This project was built using modern AI-assisted development tools.\n\nThe structure of the website was created using Lovable.\n\nChatGPT was used to help brainstorm ideas, design the mini-game mechanics, and improve the learning experience.\n\nThe project creator was responsible for the concept, design decisions, and educational structure of the site.",
+  about_stack_title: "Project Stack",
+  about_stack_lovable: "Website builder and structure",
+  about_stack_chatgpt: "AI assistance for ideas and game mechanics",
+  about_stack_js: "Mini game logic",
+  about_stack_css: "Styling and interface design",
+  about_goal_title: "Project Goal",
+  about_goal_text: "The goal of this website is to make learning linear algebra more accessible and engaging.\n\nBy combining interactive explanations with a small game system, the site encourages students to practice and understand concepts instead of just memorizing formulas.",
 };

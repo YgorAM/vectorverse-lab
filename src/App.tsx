@@ -37,6 +37,7 @@ const App = () => (
               <Route path="/playground" element={<Playground />} />
               <Route path="/console" element={<CodeConsole />} />
               <Route path="/examples" element={<Examples />} />
+              <Route path="/about" element={<About />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>
