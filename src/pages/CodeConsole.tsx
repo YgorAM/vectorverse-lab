@@ -319,7 +319,7 @@ export default function CodeConsole() {
               <span className="font-mono text-xs text-muted-foreground">{t("console_output")}</span>
             </div>
             <pre className="p-4 font-mono text-xs text-foreground min-h-[80px] whitespace-pre-wrap">
-              {output || t("console_placeholder")}
+              {output || td("console_placeholder")}
             </pre>
           </div>
 
