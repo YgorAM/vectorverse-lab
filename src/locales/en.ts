@@ -501,4 +501,7 @@ export const en: Record<string, string> = {
   theme_midnight: "Midnight Blue",
   theme_purple: "Purple Matrix",
   theme_light: "Light",
+  theme_matrix: "Matrix",
+  theme_github: "GitHub Dark",
+  theme_notion: "Notion",
 };

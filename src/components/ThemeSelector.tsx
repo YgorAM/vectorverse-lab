@@ -8,6 +8,9 @@ const themes: { id: Theme; labelKey: string; preview: string }[] = [
   { id: "midnight-blue", labelKey: "theme_midnight", preview: "bg-[hsl(225,40%,8%)]" },
   { id: "purple-matrix", labelKey: "theme_purple", preview: "bg-[hsl(270,30%,8%)]" },
   { id: "light", labelKey: "theme_light", preview: "bg-[hsl(210,20%,96%)]" },
+  { id: "matrix", labelKey: "theme_matrix", preview: "bg-[hsl(120,10%,4%)]" },
+  { id: "github-dark", labelKey: "theme_github", preview: "bg-[hsl(215,15%,10%)]" },
+  { id: "notion", labelKey: "theme_notion", preview: "bg-[hsl(40,20%,96%)]" },
 ];
 
 export default function ThemeSelector() {

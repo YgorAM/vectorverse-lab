@@ -501,4 +501,7 @@ export const ptBR: Record<string, string> = {
   theme_midnight: "Azul Meia-Noite",
   theme_purple: "Matrix Roxo",
   theme_light: "Claro",
+  theme_matrix: "Matrix",
+  theme_github: "GitHub Dark",
+  theme_notion: "Notion",
 };
