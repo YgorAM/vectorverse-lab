@@ -268,6 +268,27 @@ export const ptBR: Record<string, string> = {
   game_save_name: "Salvar",
   game_reset_score: "Resetar Pontuação",
 
+  // Tutorial
+  tut_title: "Como Jogar",
+  tut_subtitle: "Aprenda como o mini game funciona antes de começar.",
+  tut_step1_title: "Passo 1 — Entenda o Desafio",
+  tut_step1_desc: "Você receberá problemas de vetores ou matrizes. Veja a animação para entender como funciona a adição de vetores!",
+  tut_step2_title: "Passo 2 — Digite sua Resposta",
+  tut_step2_desc: "Digite o resultado da operação no campo. Use colchetes para vetores, ex: [3, 7].",
+  tut_step3_title: "Passo 3 — Verificar Resposta",
+  tut_step3_desc: "Clique no botão Verificar para conferir seu resultado. Você verá se está correto e uma explicação.",
+  tut_step4_title: "Passo 4 — Ganhe Pontos",
+  tut_step4_desc: "Cada resposta correta dá +10 pontos. Complete um nível inteiro para ganhar bônus! Veja um exemplo de multiplicação de matrizes.",
+  tut_skip: "Pular Tutorial",
+  tut_prev: "Anterior",
+  tut_next: "Próximo Passo",
+  tut_start: "Iniciar Jogo",
+
+  // Hints
+  hint_vec_add: "Dica: somar vetores significa somar cada posição. Exemplo: [2,4] + [1,3] → 2+1, 4+3 → [3,7]",
+  hint_scalar: "Dica: multiplicação por escalar significa multiplicar cada elemento pelo escalar. Exemplo: 2 × [3,5] → [6,10]",
+  hint_general: "Dica: observe o tipo de operação e aplique a fórmula passo a passo.",
+
   // Vectors page
   vec_comment: "// vetores",
   vec_title: "Vetores",

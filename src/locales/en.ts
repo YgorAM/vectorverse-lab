@@ -268,6 +268,27 @@ export const en: Record<string, string> = {
   game_save_name: "Save",
   game_reset_score: "Reset Score",
 
+  // Tutorial
+  tut_title: "How to Play",
+  tut_subtitle: "Learn how the mini game works before you start.",
+  tut_step1_title: "Step 1 — Understand the Challenge",
+  tut_step1_desc: "You'll receive vector or matrix problems. Watch the animation to see how vector addition works!",
+  tut_step2_title: "Step 2 — Enter Your Answer",
+  tut_step2_desc: "Type the result of the operation in the input field. Use brackets for vectors, e.g. [3, 7].",
+  tut_step3_title: "Step 3 — Check Your Answer",
+  tut_step3_desc: "Click the Check button to verify your result. You'll see if it's correct and an explanation.",
+  tut_step4_title: "Step 4 — Score Points",
+  tut_step4_desc: "Each correct answer gives you +10 points. Complete a full level for a bonus! Here's a matrix multiplication example.",
+  tut_skip: "Skip Tutorial",
+  tut_prev: "Previous",
+  tut_next: "Next Step",
+  tut_start: "Start Game",
+
+  // Hints
+  hint_vec_add: "Hint: Vector addition means adding each position. Example: [2,4] + [1,3] → 2+1, 4+3 → [3,7]",
+  hint_scalar: "Hint: Scalar multiplication means multiplying every element by the scalar. Example: 2 × [3,5] → [6,10]",
+  hint_general: "Hint: Look at the operation type and apply the formula step by step.",
+
   // Vectors page
   vec_comment: "// vectors",
   vec_title: "Vectors",
