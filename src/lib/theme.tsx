@@ -11,7 +11,7 @@ const ThemeContext = createContext<ThemeContextType | null>(null);
 
 function getInitialTheme(): Theme {
   const saved = localStorage.getItem("linalg-theme") as Theme | null;
-  if (saved && ["default-dark", "midnight-blue", "purple-matrix", "light"].includes(saved)) return saved;
+  if (saved && ["default-dark", "midnight-blue", "purple-matrix", "light", "matrix", "github-dark", "notion"].includes(saved)) return saved;
   return "default-dark";
 }
 
