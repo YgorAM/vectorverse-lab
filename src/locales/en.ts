@@ -560,4 +560,16 @@ export const en: Record<string, string> = {
   theme_matrix: "Matrix",
   theme_github: "GitHub Dark",
   theme_notion: "Notion",
+
+  // Device-adaptive text (tablet)
+  fund_access_try_tablet: "👆 Tap each element to see its index",
+  fund_matrix_access_try_tablet: "👆 Tap each element to see its position",
+  tut_step3_desc_tablet: "Tap the Check button to verify your result. You'll see if it's correct and an explanation.",
+  console_placeholder_tablet: '// Tap "Run" to execute your code',
+
+  // Device-adaptive text (mobile)
+  fund_access_try_mobile: "👆 Tap an element to see its index",
+  fund_matrix_access_try_mobile: "👆 Tap an element to see its position",
+  tut_step3_desc_mobile: "Tap Check to verify your answer. You'll see the result and an explanation.",
+  console_placeholder_mobile: '// Tap "Run" to execute your code',
 };
