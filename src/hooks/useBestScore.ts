@@ -1,11 +1,15 @@
 import { useState, useCallback } from "react";
 
 const PRACTICE_KEY = "linalg-practice-best";
-const GAME_KEY = "linalg-game-best";
+const GAME_KEY_PREFIX = "linalg-game-best";
 
 interface BestScore {
   playerName: string;
   bestScore: number;
+}
+
+interface GameProgress {
+  lastLevel: number;
 }
 
 function load(key: string): BestScore {
@@ -20,8 +24,10 @@ function save(key: string, data: BestScore) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
-export function useBestScore(mode: "practice" | "game") {
-  const key = mode === "practice" ? PRACTICE_KEY : GAME_KEY;
+export function useBestScore(mode: "practice" | "game", level?: number) {
+  const key = mode === "practice"
+    ? PRACTICE_KEY
+    : level ? `${GAME_KEY_PREFIX}-l${level}` : `${GAME_KEY_PREFIX}`;
   const [data, setData] = useState<BestScore>(() => load(key));
 
   const submitScore = useCallback((score: number) => {
@@ -50,4 +56,19 @@ export function useBestScore(mode: "practice" | "game") {
   }, [key]);
 
   return { bestScore: data.bestScore, playerName: data.playerName, submitScore, setPlayerName, reset };
+}
+
+const PROGRESS_KEY = "linalg-game-progress";
+
+export function loadGameProgress(): GameProgress {
+  try {
+    const raw = localStorage.getItem(PROGRESS_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch { /* ignore */ }
+  return { lastLevel: 1 };
+}
+
+export function saveLastLevel(level: number) {
+  const prev = loadGameProgress();
+  localStorage.setItem(PROGRESS_KEY, JSON.stringify({ ...prev, lastLevel: level }));
 }
