@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Grid3X3, Gamepad2, Terminal, BookOpen } from "lucide-react";
+import { ArrowRight, Grid3X3, Gamepad2, Terminal, BookOpen, GraduationCap, Trophy, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 
@@ -7,8 +7,11 @@ export default function Index() {
   const { t } = useI18n();
 
   const sections = [
+    { to: "/fundamentals", icon: GraduationCap, titleKey: "home_sec_fundamentals", descKey: "home_sec_fundamentals_desc" },
     { to: "/vectors", icon: ArrowRight, titleKey: "home_sec_vectors", descKey: "home_sec_vectors_desc" },
     { to: "/matrices", icon: Grid3X3, titleKey: "home_sec_matrices", descKey: "home_sec_matrices_desc" },
+    { to: "/practice", icon: Trophy, titleKey: "home_sec_practice", descKey: "home_sec_practice_desc" },
+    { to: "/minigame", icon: Sparkles, titleKey: "home_sec_minigame", descKey: "home_sec_minigame_desc" },
     { to: "/playground", icon: Gamepad2, titleKey: "home_sec_playground", descKey: "home_sec_playground_desc" },
     { to: "/console", icon: Terminal, titleKey: "home_sec_console", descKey: "home_sec_console_desc" },
     { to: "/examples", icon: BookOpen, titleKey: "home_sec_examples", descKey: "home_sec_examples_desc" },

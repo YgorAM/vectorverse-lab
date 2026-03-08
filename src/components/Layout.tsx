@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { Home, ArrowRight, Grid3X3, Gamepad2, Terminal, BookOpen, Menu, X } from "lucide-react";
+import { Home, ArrowRight, Grid3X3, Gamepad2, Terminal, BookOpen, Menu, X, GraduationCap, Trophy, Sparkles } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import LanguageSelector from "./LanguageSelector";
 
 const navItems = [
   { to: "/", labelKey: "nav_home", icon: Home },
+  { to: "/fundamentals", labelKey: "nav_fundamentals", icon: GraduationCap },
   { to: "/vectors", labelKey: "nav_vectors", icon: ArrowRight },
   { to: "/matrices", labelKey: "nav_matrices", icon: Grid3X3 },
+  { to: "/practice", labelKey: "nav_practice", icon: Trophy },
+  { to: "/minigame", labelKey: "nav_minigame", icon: Sparkles },
   { to: "/playground", labelKey: "nav_playground", icon: Gamepad2 },
   { to: "/console", labelKey: "nav_console", icon: Terminal },
   { to: "/examples", labelKey: "nav_examples", icon: BookOpen },
@@ -47,7 +50,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <LanguageSelector />
           </div>
         </div>
-        <nav className="flex-1 px-3 py-4 space-y-1">
+        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
           {navItems.map(({ to, labelKey, icon: Icon }) => (
             <NavLink
               key={to}
