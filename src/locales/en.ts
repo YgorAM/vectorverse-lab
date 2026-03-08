@@ -1,4 +1,4 @@
-export const en = {
+export const en: Record<string, string> = {
   // Nav
   nav_home: "Home",
   nav_vectors: "Vectors",
