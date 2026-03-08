@@ -16,6 +16,9 @@ import Playground from "./pages/Playground";
 import CodeConsole from "./pages/CodeConsole";
 import Examples from "./pages/Examples";
 import About from "./pages/About";
+import VectorVisualizer from "./pages/VectorVisualizer";
+import MatrixCalculator from "./pages/MatrixCalculator";
+import VisualExplanations from "./pages/VisualExplanations";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
