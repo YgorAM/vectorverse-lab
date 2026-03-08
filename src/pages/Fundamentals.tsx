@@ -125,7 +125,7 @@ export default function Fundamentals() {
         <p className="text-muted-foreground mb-4">{t("fund_matrix_access_desc")}</p>
         <CodeBlock>{`matrix = [[1, 2],\n          [3, 4]]\n\nmatrix[0][0] → 1\nmatrix[0][1] → 2\nmatrix[1][0] → 3\nmatrix[1][1] → 4`}</CodeBlock>
         <div className="mt-4 bg-card border border-border rounded-lg p-4">
-          <p className="text-sm text-muted-foreground mb-2">{t("fund_matrix_access_try")}</p>
+          <p className="text-sm text-muted-foreground mb-2">{td("fund_matrix_access_try")}</p>
           <div className="inline-grid grid-cols-2 gap-2">
             {[[1, 2], [3, 4]].map((row, r) =>
               row.map((val, c) => (
