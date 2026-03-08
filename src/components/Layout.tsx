@@ -29,6 +29,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between border-b border-border bg-background/95 backdrop-blur px-4 py-3 lg:hidden">
         <span className="font-mono text-sm font-bold text-primary">LinAlg<span className="text-foreground">.dev</span></span>
         <div className="flex items-center gap-2">
+          <ThemeSelector />
           <LanguageSelector />
           <button onClick={() => setMobileOpen(!mobileOpen)} className="text-muted-foreground">
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}

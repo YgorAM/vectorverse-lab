@@ -494,4 +494,11 @@ export const en: Record<string, string> = {
   about_stack_css: "Styling and interface design",
   about_goal_title: "Project Goal",
   about_goal_text: "The goal of this website is to make learning linear algebra more accessible and engaging.\n\nBy combining interactive explanations with a small game system, the site encourages students to practice and understand concepts instead of just memorizing formulas.",
+
+  // Theme
+  theme_label: "Theme",
+  theme_default: "Dark",
+  theme_midnight: "Midnight Blue",
+  theme_purple: "Purple Matrix",
+  theme_light: "Light",
 };

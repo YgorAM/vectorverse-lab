@@ -494,4 +494,11 @@ export const ptBR: Record<string, string> = {
   about_stack_css: "Estilização e design da interface",
   about_goal_title: "Objetivo do Projeto",
   about_goal_text: "O objetivo deste site é tornar o aprendizado de álgebra linear mais acessível e envolvente.\n\nAo combinar explicações interativas com um pequeno sistema de jogo, o site incentiva os estudantes a praticar e entender conceitos em vez de apenas memorizar fórmulas.",
+
+  // Theme
+  theme_label: "Tema",
+  theme_default: "Escuro",
+  theme_midnight: "Azul Meia-Noite",
+  theme_purple: "Matrix Roxo",
+  theme_light: "Claro",
 };
