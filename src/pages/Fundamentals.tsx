@@ -20,7 +20,7 @@ const Section = ({ title, children }: { title: string; children: React.ReactNode
 );
 
 export default function Fundamentals() {
-  const { t } = useI18n();
+  const { t, td } = useI18n();
 
   return (
     <div>
