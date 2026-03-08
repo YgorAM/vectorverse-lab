@@ -262,6 +262,11 @@ export const en: Record<string, string> = {
   game_type_mat_add: "Matrix Addition",
   game_type_mat_mul: "Matrix ×",
   game_identity_exp: "Multiplying by the identity matrix returns the original matrix.",
+  game_best_score: "Your Best Score",
+  game_new_record: "New Record!",
+  game_name_placeholder: "Your name...",
+  game_save_name: "Save",
+  game_reset_score: "Reset Score",
 
   // Vectors page
   vec_comment: "// vectors",
