@@ -1,10 +1,11 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
-import { CheckCircle2, XCircle, Zap } from "lucide-react";
+import { CheckCircle2, XCircle, Zap, Trophy, Trash2, RotateCcw } from "lucide-react";
+import { useBestScore } from "@/hooks/useBestScore";
 
 interface Challenge {
   type: string;
@@ -16,18 +17,14 @@ interface Challenge {
 
 function generateChallenges(t: (k: string) => string): Challenge[] {
   return [
-    // Level 1 - Vector basics
     { type: t("game_type_vec_add"), question: "[1, 2] + [3, 4] = ?", answer: "[4, 6]", explanation: "[1+3, 2+4] = [4, 6]", level: 1 },
     { type: t("game_type_vec_add"), question: "[5, 0] + [0, 3] = ?", answer: "[5, 3]", explanation: "[5+0, 0+3] = [5, 3]", level: 1 },
     { type: t("game_type_scalar"), question: "2 × [3, 5] = ?", answer: "[6, 10]", explanation: "[2×3, 2×5] = [6, 10]", level: 1 },
-    // Level 2 - Vector operations
     { type: t("game_type_scalar"), question: "3 × [1, 4] = ?", answer: "[3, 12]", explanation: "[3×1, 3×4] = [3, 12]", level: 2 },
     { type: t("game_type_dot"), question: "[1, 2] · [3, 4] = ?", answer: "11", explanation: "1×3 + 2×4 = 3 + 8 = 11", level: 2 },
     { type: t("game_type_dot"), question: "[2, 0] · [0, 5] = ?", answer: "0", explanation: "2×0 + 0×5 = 0", level: 2 },
-    // Level 3 - Matrix basics
     { type: t("game_type_mat_add"), question: "[[1, 0], [0, 1]] + [[1, 1], [1, 1]] = ?", answer: "[[2, 1], [1, 2]]", explanation: "[[1+1, 0+1], [0+1, 1+1]]", level: 3 },
     { type: t("game_type_mat_add"), question: "[[2, 3], [4, 5]] + [[1, 1], [1, 1]] = ?", answer: "[[3, 4], [5, 6]]", explanation: "[[2+1, 3+1], [4+1, 5+1]]", level: 3 },
-    // Level 4 - Matrix operations
     { type: t("game_type_mat_mul"), question: "[[1, 0], [0, 1]] × [[5, 6], [7, 8]] = ?", answer: "[[5, 6], [7, 8]]", explanation: t("game_identity_exp"), level: 4 },
     { type: t("game_type_mat_mul"), question: "[[1, 2], [0, 1]] × [[1, 0], [1, 1]] = ?", answer: "[[3, 2], [1, 1]]", explanation: "[[1×1+2×1, 1×0+2×1], [0×1+1×1, 0×0+1×1]]", level: 4 },
   ];
@@ -37,8 +34,12 @@ function normalize(s: string): string {
   return s.replace(/\s/g, "");
 }
 
+const POINTS_PER_CORRECT = 10;
+const LEVEL_BONUS = 5;
+
 export default function MiniGame() {
   const { t } = useI18n();
+  const { bestScore, playerName, submitScore, setPlayerName, reset: resetBest } = useBestScore("game");
   const challenges = useMemo(() => generateChallenges(t), [t]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -47,6 +48,9 @@ export default function MiniGame() {
   const [isCorrect, setIsCorrect] = useState(false);
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [nameInput, setNameInput] = useState(playerName);
+  const [isNewRecord, setIsNewRecord] = useState(false);
+  const [levelCompleted, setLevelCompleted] = useState<Set<number>>(new Set());
 
   const c = challenges[currentIndex];
   const currentLevel = c.level;
@@ -57,8 +61,19 @@ export default function MiniGame() {
     const correct = normalize(userAnswer) === normalize(c.answer);
     setIsCorrect(correct);
     setChecked(true);
-    if (correct) setScore(s => s + 10 * currentLevel);
-  }, [userAnswer, c.answer, currentLevel]);
+    if (correct) {
+      setScore(s => {
+        let pts = POINTS_PER_CORRECT;
+        // Check if this completes a level
+        const isLastInLevel = currentIndex === challenges.length - 1 || challenges[currentIndex + 1]?.level !== currentLevel;
+        if (isLastInLevel && !levelCompleted.has(currentLevel)) {
+          pts += LEVEL_BONUS;
+          setLevelCompleted(prev => new Set(prev).add(currentLevel));
+        }
+        return s + pts;
+      });
+    }
+  }, [userAnswer, c.answer, currentLevel, currentIndex, challenges, levelCompleted]);
 
   const handleNext = () => {
     if (currentIndex < challenges.length - 1) {
@@ -70,6 +85,13 @@ export default function MiniGame() {
     }
   };
 
+  useEffect(() => {
+    if (finished) {
+      setIsNewRecord(score > bestScore);
+      submitScore(score);
+    }
+  }, [finished]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const handleRestart = () => {
     setCurrentIndex(0);
     setUserAnswer("");
@@ -77,6 +99,12 @@ export default function MiniGame() {
     setIsCorrect(false);
     setScore(0);
     setFinished(false);
+    setIsNewRecord(false);
+    setLevelCompleted(new Set());
+  };
+
+  const handleSaveName = () => {
+    setPlayerName(nameInput.trim());
   };
 
   if (finished) {
@@ -85,8 +113,41 @@ export default function MiniGame() {
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-16">
           <h1 className="text-3xl font-bold mb-4">🏆 {t("game_complete")}</h1>
           <p className="text-4xl font-bold text-primary mb-2">{score} {t("game_points")}</p>
-          <p className="text-muted-foreground mb-6">{t("game_out_of")} {challenges.reduce((acc, ch) => acc + 10 * ch.level, 0)}</p>
-          <Button onClick={handleRestart}>{t("game_play_again")}</Button>
+
+          {isNewRecord && (
+            <motion.p initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-primary font-bold text-lg mb-4">
+              🎊 {t("game_new_record")}
+            </motion.p>
+          )}
+
+          <div className="inline-flex items-center gap-2 bg-card border border-border rounded-lg px-4 py-3 mb-4">
+            <Trophy className="text-yellow-400" size={18} />
+            <span className="text-sm font-mono">
+              {playerName ? `${playerName} — ` : ""}{t("game_best_score")}: {Math.max(score, bestScore)}
+            </span>
+          </div>
+
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <Input
+              value={nameInput}
+              onChange={e => setNameInput(e.target.value)}
+              onKeyDown={e => e.key === "Enter" && handleSaveName()}
+              placeholder={t("game_name_placeholder")}
+              className="max-w-[180px] font-mono text-sm"
+            />
+            <Button variant="outline" size="sm" onClick={handleSaveName}>{t("game_save_name")}</Button>
+          </div>
+
+          <div className="flex items-center justify-center gap-3">
+            <Button onClick={handleRestart} className="gap-2">
+              <RotateCcw size={14} />
+              {t("game_play_again")}
+            </Button>
+            <Button variant="ghost" size="sm" onClick={resetBest} className="text-muted-foreground gap-1">
+              <Trash2 size={12} />
+              {t("game_reset_score")}
+            </Button>
+          </div>
         </motion.div>
       </div>
     );
@@ -97,8 +158,16 @@ export default function MiniGame() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
         <p className="font-mono text-xs text-primary mb-2">{t("game_comment")}</p>
         <h1 className="text-3xl font-bold mb-2">{t("game_title")}</h1>
-        <p className="text-muted-foreground mb-6">{t("game_subtitle")}</p>
+        <p className="text-muted-foreground mb-4">{t("game_subtitle")}</p>
       </motion.div>
+
+      {/* Best score banner */}
+      {bestScore > 0 && (
+        <div className="flex items-center gap-2 text-sm font-mono text-muted-foreground mb-4">
+          <Trophy className="text-yellow-400" size={14} />
+          {playerName ? `${playerName} — ` : ""}{t("game_best_score")}: {bestScore}
+        </div>
+      )}
 
       {/* Stats bar */}
       <div className="flex items-center gap-4 mb-4">
@@ -112,7 +181,6 @@ export default function MiniGame() {
 
       <AnimatePresence mode="wait">
         <motion.div key={currentIndex} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-          {/* Challenge card */}
           <div className="bg-card border border-border rounded-lg p-6 mb-4">
             <span className="inline-block text-xs font-mono px-2 py-1 rounded border border-primary/30 text-primary bg-primary/10 mb-3">
               {c.type}
@@ -120,7 +188,6 @@ export default function MiniGame() {
             <pre className="font-mono text-lg text-foreground">{c.question}</pre>
           </div>
 
-          {/* Input */}
           <div className="flex gap-2 mb-4">
             <Input
               value={userAnswer}
@@ -137,7 +204,6 @@ export default function MiniGame() {
             )}
           </div>
 
-          {/* Feedback */}
           {checked && (
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
               <div className={`flex items-start gap-2 p-4 rounded-lg border ${isCorrect ? "border-green-500/30 bg-green-500/10" : "border-red-500/30 bg-red-500/10"}`}>
