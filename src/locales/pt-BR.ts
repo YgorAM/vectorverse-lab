@@ -11,6 +11,9 @@ export const ptBR: Record<string, string> = {
   nav_examples: "Exemplos",
   nav_subtitle: "Álgebra Linear para Desenvolvedores",
   nav_footer: "Feito para aprendizes 🚀",
+  nav_group_learn: "Aprender",
+  nav_group_practice: "Praticar",
+  nav_group_info: "Info",
 
   // Home
   home_comment: "// bem-vindo",

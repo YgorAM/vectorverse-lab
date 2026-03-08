@@ -11,6 +11,9 @@ export const en: Record<string, string> = {
   nav_examples: "Examples",
   nav_subtitle: "Linear Algebra for Developers",
   nav_footer: "Built for learners 🚀",
+  nav_group_learn: "Learn",
+  nav_group_practice: "Practice",
+  nav_group_info: "Info",
 
   // Home
   home_comment: "// welcome",

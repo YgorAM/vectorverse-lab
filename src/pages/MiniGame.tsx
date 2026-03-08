@@ -14,10 +14,10 @@ function normalize(s: string): string {
   return s.replace(/\s/g, "");
 }
 
-const LEVEL_META: Record<GameDifficulty, { badge: string; colorClass: string; labelKey: string }> = {
-  1: { badge: "🟢", colorClass: "border-green-500/40 bg-green-500/10 text-green-400", labelKey: "game_lvl_beginner" },
-  2: { badge: "🔵", colorClass: "border-blue-500/40 bg-blue-500/10 text-blue-400", labelKey: "game_lvl_intermediate" },
-  3: { badge: "🟣", colorClass: "border-purple-500/40 bg-purple-500/10 text-purple-400", labelKey: "game_lvl_advanced" },
+const LEVEL_META: Record<GameDifficulty, { badge: string; colorClass: string; labelKey: string; glowClass: string }> = {
+  1: { badge: "🟢", colorClass: "border-green-500/40 bg-green-500/10 text-green-400", labelKey: "game_lvl_beginner", glowClass: "hover:shadow-[0_0_20px_hsl(145,70%,45%,0.15)]" },
+  2: { badge: "🔵", colorClass: "border-blue-500/40 bg-blue-500/10 text-blue-400", labelKey: "game_lvl_intermediate", glowClass: "hover:shadow-[0_0_20px_hsl(212,70%,55%,0.15)]" },
+  3: { badge: "🟣", colorClass: "border-purple-500/40 bg-purple-500/10 text-purple-400", labelKey: "game_lvl_advanced", glowClass: "hover:shadow-[0_0_20px_hsl(280,80%,65%,0.15)]" },
 };
 
 /* ─── Level Selector ─── */
@@ -39,8 +39,10 @@ function LevelSelector({ onSelect, t }: { onSelect: (d: GameDifficulty) => void;
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
+              whileHover={{ scale: 1.04, y: -4 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => onSelect(lv)}
-              className={`flex flex-col items-start gap-2 p-5 rounded-lg border ${meta.colorClass} hover:scale-[1.03] transition-transform text-left`}
+              className={`flex flex-col items-start gap-2 p-5 rounded-lg border ${meta.colorClass} ${meta.glowClass} transition-shadow duration-300 text-left cursor-pointer`}
             >
               <span className="text-2xl">{meta.badge}</span>
               <span className="font-bold text-foreground">{t(meta.labelKey)}</span>
@@ -365,11 +367,27 @@ export default function MiniGame() {
           </div>
 
           {checked && (
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-              <div className={`flex items-start gap-2 p-4 rounded-lg border ${isCorrect ? "border-green-500/30 bg-green-500/10" : "border-red-500/30 bg-red-500/10"}`}>
-                {isCorrect ? <CheckCircle2 className="text-green-400 mt-0.5" size={18} /> : <XCircle className="text-red-400 mt-0.5" size={18} />}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
+              <div className={`flex items-start gap-3 p-4 rounded-lg border-2 ${
+                isCorrect
+                  ? "border-green-500/50 bg-green-500/10 shadow-[0_0_15px_hsl(145,70%,45%,0.1)]"
+                  : "border-red-500/50 bg-red-500/10 shadow-[0_0_15px_hsl(0,70%,55%,0.1)]"
+              }`}>
+                {isCorrect ? (
+                  <motion.div initial={{ scale: 0, rotate: -180 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: "spring", stiffness: 400 }}>
+                    <CheckCircle2 className="text-green-400 mt-0.5" size={20} />
+                  </motion.div>
+                ) : (
+                  <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 400 }}>
+                    <XCircle className="text-red-400 mt-0.5" size={20} />
+                  </motion.div>
+                )}
                 <div>
-                  <p className={`font-medium text-sm ${isCorrect ? "text-green-400" : "text-red-400"}`}>
+                  <p className={`font-semibold text-sm ${isCorrect ? "text-green-400" : "text-red-400"}`}>
                     {isCorrect
                       ? `${t("game_right")} +${lastPoints} ${t("game_pts")}${hintFeedback}`
                       : t("game_wrong")
