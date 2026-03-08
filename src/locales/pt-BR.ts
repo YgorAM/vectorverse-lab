@@ -69,11 +69,11 @@ export const ptBR: Record<string, string> = {
   vexp_dp_step5: "Some os produtos: 6 + 20 = 26",
 
   // Home
-  home_comment: "// bem-vindo",
-  home_title_1: "Álgebra Linear",
-  home_title_2: "para Desenvolvedores",
-  home_desc: "Domine vetores e matrizes — a matemática por trás de motores de jogos, gráficos 3D, aprendizado de máquina e ciência de dados. Exemplos interativos, código ao vivo e explicações visuais.",
-  home_explore: "Explorar",
+  home_comment: "// bem-vindo ao matrix academy",
+  home_title_1: "Matemática para Programadores —",
+  home_title_2: "Ferramentas Interativas",
+  home_desc: "Domine vetores e matrizes — a matemática por trás de motores de jogos, gráficos 3D, aprendizado de máquina e ciência de dados. Ferramentas interativas, código ao vivo e explicações visuais para desenvolvedores e estudantes de computação.",
+  home_explore: "Ferramentas Interativas de Matemática",
   home_sec_fundamentals: "Fundamentos",
   home_sec_fundamentals_desc: "Comece do zero — índices, vetores, matrizes",
   home_sec_vectors: "Vetores",
