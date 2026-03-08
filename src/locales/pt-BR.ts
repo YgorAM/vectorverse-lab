@@ -372,4 +372,11 @@ export const ptBR: Record<string, string> = {
   // Language selector
   lang_en: "English",
   lang_pt: "Português (BR)",
+
+  // About
+  about_title: "Sobre o Criador",
+  about_desc: "Criado por Ygor Amaral, estudante de Sistemas de Informação apaixonado por programação, tecnologia e ferramentas educacionais.",
+  about_portfolio: "Ver Portfólio",
+  about_linkedin: "Perfil no LinkedIn",
+  about_built_by: "Criado por Ygor Amaral",
 };

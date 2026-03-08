@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Grid3X3, Gamepad2, Terminal, BookOpen, GraduationCap, Trophy, Sparkles } from "lucide-react";
+import { ArrowRight, Grid3X3, Gamepad2, Terminal, BookOpen, GraduationCap, Trophy, Sparkles, User, ExternalLink, Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 
@@ -58,6 +58,42 @@ export default function Index() {
           ))}
         </div>
       </div>
+
+      {/* About the Creator */}
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="mt-10">
+        <div className="rounded-lg border border-border bg-card p-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center text-primary shrink-0">
+              <User size={22} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h2 className="font-mono text-xs text-muted-foreground uppercase tracking-wider mb-1">{t("about_title")}</h2>
+              <p className="font-semibold text-lg text-foreground">Ygor Amaral</p>
+              <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{t("about_desc")}</p>
+              <div className="flex flex-wrap gap-3 mt-4">
+                <a
+                  href="https://ygoramaral.onrender.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                >
+                  <ExternalLink size={14} />
+                  {t("about_portfolio")}
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/ygor-amaral30"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium border border-border bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
+                >
+                  <Linkedin size={14} />
+                  {t("about_linkedin")}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 }
