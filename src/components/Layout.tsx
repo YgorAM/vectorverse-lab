@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { Home, ArrowRight, Grid3X3, Gamepad2, Terminal, BookOpen, Menu, X, GraduationCap, Trophy, Sparkles } from "lucide-react";
+import { Home, ArrowRight, Grid3X3, Gamepad2, Terminal, BookOpen, Menu, X, GraduationCap, Trophy, Sparkles, Info } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import LanguageSelector from "./LanguageSelector";
 
