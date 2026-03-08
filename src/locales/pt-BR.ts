@@ -1,6 +1,4 @@
-import type { en } from "./en";
-
-export const ptBR: typeof en = {
+export const ptBR: Record<string, string> = {
   // Nav
   nav_home: "Início",
   nav_vectors: "Vetores",

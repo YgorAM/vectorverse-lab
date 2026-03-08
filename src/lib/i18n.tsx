@@ -36,7 +36,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     document.documentElement.lang = locale === "pt-BR" ? "pt-BR" : "en";
   }, [locale]);
 
-  const t = (key: keyof Translations): string => {
+  const t = (key: string): string => {
     return translationsMap[locale]?.[key] ?? translationsMap.en[key] ?? key;
   };
 

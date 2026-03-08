@@ -122,4 +122,4 @@ export const en: Record<string, string> = {
   // Language selector
   lang_en: "English",
   lang_pt: "Português (BR)",
-} as const;
+};
