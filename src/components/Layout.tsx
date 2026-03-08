@@ -27,6 +27,14 @@ const navGroups = [
     ],
   },
   {
+    labelKey: "nav_group_tools",
+    items: [
+      { to: "/vector-visualizer", labelKey: "nav_vector_visualizer", icon: Eye },
+      { to: "/matrix-calculator", labelKey: "nav_matrix_calculator", icon: Calculator },
+      { to: "/visual-explanations", labelKey: "nav_visual_explanations", icon: Lightbulb },
+    ],
+  },
+  {
     labelKey: "nav_group_info",
     items: [
       { to: "/about", labelKey: "nav_about", icon: Info },
