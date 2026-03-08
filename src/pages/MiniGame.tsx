@@ -142,12 +142,8 @@ function CompletionScreen({
 export default function MiniGame() {
   const { t } = useI18n();
 
-  const [showTutorial, setShowTutorial] = useState(() => shouldShowTutorial());
-  const [difficulty, setDifficulty] = useState<GameDifficulty | null>(() => {
-    const saved = loadGameProgress();
-    return null; // always show selector
-  });
-  const [gameStarted, setGameStarted] = useState(false);
+  const [phase, setPhase] = useState<"levels" | "tutorial" | "playing" | "finished">("levels");
+  const [difficulty, setDifficulty] = useState<GameDifficulty | null>(null);
 
   // Derived from difficulty
   const activeDifficulty = difficulty ?? 1;
@@ -184,8 +180,12 @@ export default function MiniGame() {
   const handleSelectLevel = (lv: GameDifficulty) => {
     setDifficulty(lv);
     saveLastLevel(lv);
-    setGameStarted(true);
-    startTimeRef.current = Date.now();
+    if (shouldShowTutorial()) {
+      setPhase("tutorial");
+    } else {
+      setPhase("playing");
+      startTimeRef.current = Date.now();
+    }
     // Reset game state
     setCurrentIndex(0);
     setUserAnswer("");
@@ -196,7 +196,6 @@ export default function MiniGame() {
     setHintsUsed(0);
     setTotalHintsUsed(0);
     setCorrectCount(0);
-    setFinished(false);
     setIsNewRecord(false);
   };
 
@@ -242,29 +241,36 @@ export default function MiniGame() {
 
   const handleRestart = () => {
     handleSelectLevel(activeDifficulty);
+    setPhase("playing");
+    startTimeRef.current = Date.now();
   };
 
   const handleBackToLevels = () => {
     setDifficulty(null);
-    setGameStarted(false);
+    setPhase("levels");
   };
 
   const handleSaveName = () => {
     setPlayerName(nameInput.trim());
   };
 
+  const handleTutorialDone = () => {
+    setPhase("playing");
+    startTimeRef.current = Date.now();
+  };
+
   // Tutorial
-  if (showTutorial) {
-    return <GameTutorial onStart={() => setShowTutorial(false)} />;
+  if (phase === "tutorial") {
+    return <GameTutorial onStart={handleTutorialDone} />;
   }
 
   // Level selector
-  if (!gameStarted) {
+  if (phase === "levels") {
     return <LevelSelector onSelect={handleSelectLevel} t={t} />;
   }
 
   // Completion
-  if (finished) {
+  if (phase === "finished" || finished) {
     return (
       <CompletionScreen
         difficulty={activeDifficulty}

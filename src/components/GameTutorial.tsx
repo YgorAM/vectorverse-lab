@@ -78,7 +78,6 @@ function MatrixMulAnimation() {
   const B = [[3, 4], [7, 8]];
   const R = [[17, 20], [57, 68]];
 
-  // step 0: show matrices, 1-4: highlight cells, 5: show result
   const highlightA = step >= 1 && step <= 4 ? (step <= 2 ? 0 : 1) : -1;
   const highlightBCol = step >= 1 && step <= 4 ? ((step - 1) % 2) : -1;
   const resultCell = step >= 1 && step <= 4 ? [step <= 2 ? 0 : 1, (step - 1) % 2] : null;
@@ -86,7 +85,6 @@ function MatrixMulAnimation() {
   return (
     <div className="flex flex-col items-center gap-3 font-mono text-xs">
       <div className="flex items-center gap-4">
-        {/* Matrix A */}
         <div className="flex flex-col gap-1">
           {A.map((row, r) => (
             <div key={r} className="flex gap-1">
@@ -99,7 +97,6 @@ function MatrixMulAnimation() {
           ))}
         </div>
         <span className="text-muted-foreground">×</span>
-        {/* Matrix B */}
         <div className="flex flex-col gap-1">
           {B.map((row, r) => (
             <div key={r} className="flex gap-1">
@@ -112,7 +109,6 @@ function MatrixMulAnimation() {
           ))}
         </div>
         <span className="text-muted-foreground">=</span>
-        {/* Result */}
         <div className="flex flex-col gap-1">
           {R.map((row, r) => (
             <div key={r} className="flex gap-1">
@@ -125,6 +121,60 @@ function MatrixMulAnimation() {
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+function ScoreTable({ t }: { t: (k: string) => string }) {
+  const rows = [
+    { hints: 0, pts: 30, key: "tut_score_row0" },
+    { hints: 1, pts: 25, key: "tut_score_row1" },
+    { hints: 2, pts: 18, key: "tut_score_row2" },
+    { hints: 3, pts: 13, key: "tut_score_row3" },
+  ];
+
+  return (
+    <div className="space-y-1.5">
+      {rows.map((r, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: i * 0.12 }}
+          className="flex items-center justify-between px-3 py-1.5 rounded border border-border bg-card font-mono text-xs"
+        >
+          <span className="text-muted-foreground">{t(r.key)}</span>
+          <span className="text-primary font-bold">+{r.pts}</span>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+function LevelCards({ t }: { t: (k: string) => string }) {
+  const levels = [
+    { emoji: "🟢", labelKey: "game_lvl_beginner", descKey: "tut_lvl1_short", colorClass: "border-green-500/40 bg-green-500/10" },
+    { emoji: "🔵", labelKey: "game_lvl_intermediate", descKey: "tut_lvl2_short", colorClass: "border-blue-500/40 bg-blue-500/10" },
+    { emoji: "🟣", labelKey: "game_lvl_advanced", descKey: "tut_lvl3_short", colorClass: "border-purple-500/40 bg-purple-500/10" },
+  ];
+
+  return (
+    <div className="space-y-2">
+      {levels.map((lv, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, x: 15 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: i * 0.12 }}
+          className={`flex items-center gap-3 px-4 py-2.5 rounded-lg border ${lv.colorClass}`}
+        >
+          <span className="text-lg">{lv.emoji}</span>
+          <div>
+            <p className="text-sm font-bold text-foreground">{t(lv.labelKey)}</p>
+            <p className="text-xs text-muted-foreground">{t(lv.descKey)}</p>
+          </div>
+        </motion.div>
+      ))}
     </div>
   );
 }
@@ -163,7 +213,17 @@ export function GameTutorial({ onStart }: Props) {
     {
       title: t("tut_step4_title"),
       desc: t("tut_step4_desc"),
+      content: <ScoreTable t={t} />,
+    },
+    {
+      title: t("tut_step5_title"),
+      desc: t("tut_step5_desc"),
       content: <MatrixMulAnimation />,
+    },
+    {
+      title: t("tut_step6_title"),
+      desc: t("tut_step6_desc"),
+      content: <LevelCards t={t} />,
     },
   ];
 
@@ -187,7 +247,6 @@ export function GameTutorial({ onStart }: Props) {
         <p className="text-muted-foreground mb-6">{t("tut_subtitle")}</p>
       </motion.div>
 
-      {/* Step indicators */}
       <div className="flex items-center gap-2 mb-6">
         {steps.map((_, i) => (
           <div key={i} className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${i <= step ? "bg-primary" : "bg-muted"}`} />
