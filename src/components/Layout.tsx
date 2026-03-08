@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { Home, ArrowRight, Grid3X3, Gamepad2, Terminal, BookOpen, Menu, X, GraduationCap, Trophy, Sparkles, Info } from "lucide-react";
+import { Home, ArrowRight, Grid3X3, Gamepad2, Terminal, BookOpen, Menu, X, GraduationCap, Trophy, Sparkles, Info, Eye, Calculator, Lightbulb } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import LanguageSelector from "./LanguageSelector";
 import ThemeSelector from "./ThemeSelector";
@@ -24,6 +24,14 @@ const navGroups = [
     items: [
       { to: "/practice", labelKey: "nav_practice", icon: Trophy },
       { to: "/minigame", labelKey: "nav_minigame", icon: Sparkles },
+    ],
+  },
+  {
+    labelKey: "nav_group_tools",
+    items: [
+      { to: "/vector-visualizer", labelKey: "nav_vector_visualizer", icon: Eye },
+      { to: "/matrix-calculator", labelKey: "nav_matrix_calculator", icon: Calculator },
+      { to: "/visual-explanations", labelKey: "nav_visual_explanations", icon: Lightbulb },
     ],
   },
   {

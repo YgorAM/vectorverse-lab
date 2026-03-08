@@ -16,6 +16,9 @@ import Playground from "./pages/Playground";
 import CodeConsole from "./pages/CodeConsole";
 import Examples from "./pages/Examples";
 import About from "./pages/About";
+import VectorVisualizer from "./pages/VectorVisualizer";
+import MatrixCalculator from "./pages/MatrixCalculator";
+import VisualExplanations from "./pages/VisualExplanations";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,6 +43,9 @@ const App = () => (
               <Route path="/console" element={<CodeConsole />} />
               <Route path="/examples" element={<Examples />} />
               <Route path="/about" element={<About />} />
+              <Route path="/vector-visualizer" element={<VectorVisualizer />} />
+              <Route path="/matrix-calculator" element={<MatrixCalculator />} />
+              <Route path="/visual-explanations" element={<VisualExplanations />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>
