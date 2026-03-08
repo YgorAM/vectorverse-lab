@@ -8,6 +8,9 @@ import Layout from "./components/Layout";
 import Index from "./pages/Index";
 import Vectors from "./pages/Vectors";
 import Matrices from "./pages/Matrices";
+import Fundamentals from "./pages/Fundamentals";
+import Practice from "./pages/Practice";
+import MiniGame from "./pages/MiniGame";
 import Playground from "./pages/Playground";
 import CodeConsole from "./pages/CodeConsole";
 import Examples from "./pages/Examples";
@@ -25,8 +28,11 @@ const App = () => (
           <Layout>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/fundamentals" element={<Fundamentals />} />
               <Route path="/vectors" element={<Vectors />} />
               <Route path="/matrices" element={<Matrices />} />
+              <Route path="/practice" element={<Practice />} />
+              <Route path="/minigame" element={<MiniGame />} />
               <Route path="/playground" element={<Playground />} />
               <Route path="/console" element={<CodeConsole />} />
               <Route path="/examples" element={<Examples />} />
