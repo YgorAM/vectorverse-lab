@@ -315,7 +315,7 @@ export default function CodeConsole() {
           {/* Output */}
           <div className="bg-muted border border-border rounded-lg">
             <div className="flex items-center gap-2 px-3 py-2 border-b border-border">
-              <div className="w-2 h-2 rounded-full bg-green-500" />
+              <div className="w-2 h-2 rounded-full bg-primary" />
               <span className="font-mono text-xs text-muted-foreground">{t("console_output")}</span>
             </div>
             <pre className="p-4 font-mono text-xs text-foreground min-h-[80px] whitespace-pre-wrap">
