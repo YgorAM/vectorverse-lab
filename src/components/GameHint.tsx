@@ -1,34 +1,49 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Lightbulb } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
 
 interface Props {
-  challengeIndex: number;
-  questionType: string;
+  hints: string[];
+  revealedCount: number;
+  onRevealNext: () => void;
+  disabled: boolean;
 }
 
-const HINT_LIMIT = 3;
-
-export function GameHint({ challengeIndex, questionType }: Props) {
+export function GameHintButton({ hints, revealedCount, onRevealNext, disabled }: Props) {
   const { t } = useI18n();
-
-  if (challengeIndex >= HINT_LIMIT) return null;
-
-  const hintKey = questionType.includes("Addition") || questionType.includes("Adição")
-    ? "hint_vec_add"
-    : questionType.includes("Scalar") || questionType.includes("Escalar")
-    ? "hint_scalar"
-    : "hint_general";
+  const maxHints = hints.length;
+  const allRevealed = revealedCount >= maxHints;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
-      className="flex items-start gap-2 p-3 rounded-lg border border-primary/20 bg-primary/5 mb-4"
-    >
-      <Lightbulb className="text-primary mt-0.5 shrink-0" size={16} />
-      <p className="text-xs text-muted-foreground">{t(hintKey)}</p>
-    </motion.div>
+    <div className="mb-4">
+      {!disabled && (
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={onRevealNext}
+          disabled={allRevealed || disabled}
+          className="gap-1.5 mb-3 border-primary/30 text-primary hover:bg-primary/10"
+        >
+          <Lightbulb size={14} />
+          {t("game_hint_btn")} ({revealedCount}/{maxHints})
+        </Button>
+      )}
+
+      <AnimatePresence>
+        {hints.slice(0, revealedCount).map((hint, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.05 }}
+            className="flex items-start gap-2 p-3 rounded-lg border border-primary/20 bg-primary/5 mb-2 shadow-[0_0_12px_-4px_hsl(var(--primary)/0.15)]"
+          >
+            <Lightbulb className="text-primary mt-0.5 shrink-0" size={14} />
+            <p className="text-xs text-muted-foreground">{hint}</p>
+          </motion.div>
+        ))}
+      </AnimatePresence>
+    </div>
   );
 }
