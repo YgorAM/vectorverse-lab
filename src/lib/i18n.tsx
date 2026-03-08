@@ -4,14 +4,14 @@ import { ptBR } from "@/locales/pt-BR";
 
 export type Locale = "en" | "pt-BR";
 
-type Translations = typeof en;
+type Translations = Record<string, string>;
 
 const translationsMap: Record<Locale, Translations> = { en, "pt-BR": ptBR };
 
 interface I18nContextType {
   locale: Locale;
   setLocale: (l: Locale) => void;
-  t: (key: keyof Translations) => string;
+  t: (key: string) => string;
 }
 
 const I18nContext = createContext<I18nContextType | null>(null);
