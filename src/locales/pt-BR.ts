@@ -90,7 +90,7 @@ export const ptBR: Record<string, string> = {
   home_sec_console_desc: "Escreva e execute código em JS, Python, Java",
   home_sec_examples: "Exemplos",
   home_sec_examples_desc: "Trechos de código prontos para executar",
-  home_why: "// por que aprender isso?",
+  home_why: "// matemática para game dev & programação",
   home_game_dev: "🎮 Game Dev",
   home_3d: "🎨 Gráficos 3D",
   home_ml: "🤖 Machine Learning",

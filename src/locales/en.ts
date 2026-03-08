@@ -90,7 +90,7 @@ export const en: Record<string, string> = {
   home_sec_console_desc: "Write and run code in JS, Python, Java",
   home_sec_examples: "Examples",
   home_sec_examples_desc: "Ready-to-run code snippets",
-  home_why: "// why learn this?",
+  home_why: "// math for game development & programming",
   home_game_dev: "🎮 Game Dev",
   home_3d: "🎨 3D Graphics",
   home_ml: "🤖 Machine Learning",
