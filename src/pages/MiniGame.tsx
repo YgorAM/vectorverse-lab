@@ -142,12 +142,8 @@ function CompletionScreen({
 export default function MiniGame() {
   const { t } = useI18n();
 
-  const [showTutorial, setShowTutorial] = useState(() => shouldShowTutorial());
-  const [difficulty, setDifficulty] = useState<GameDifficulty | null>(() => {
-    const saved = loadGameProgress();
-    return null; // always show selector
-  });
-  const [gameStarted, setGameStarted] = useState(false);
+  const [phase, setPhase] = useState<"levels" | "tutorial" | "playing" | "finished">("levels");
+  const [difficulty, setDifficulty] = useState<GameDifficulty | null>(null);
 
   // Derived from difficulty
   const activeDifficulty = difficulty ?? 1;
