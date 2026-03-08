@@ -1,23 +1,25 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useI18n } from "@/lib/i18n";
 
 type Operation = 'vec-add' | 'vec-dot' | 'vec-scalar' | 'mat-add' | 'mat-mul';
 
-const ops: { id: Operation; label: string; cat: string }[] = [
-  { id: 'vec-add', label: 'Addition', cat: 'Vectors' },
-  { id: 'vec-dot', label: 'Dot Product', cat: 'Vectors' },
-  { id: 'vec-scalar', label: 'Scalar ×', cat: 'Vectors' },
-  { id: 'mat-add', label: 'Addition', cat: 'Matrices' },
-  { id: 'mat-mul', label: 'Multiply', cat: 'Matrices' },
-];
-
 export default function Playground() {
+  const { t } = useI18n();
   const [op, setOp] = useState<Operation>('vec-add');
   const [vecA, setVecA] = useState([3, 5, 2]);
   const [vecB, setVecB] = useState([1, 4, 6]);
   const [scalar, setScalar] = useState(3);
   const [matA, setMatA] = useState([[1, 2], [3, 4]]);
   const [matB, setMatB] = useState([[5, 6], [7, 8]]);
+
+  const ops: { id: Operation; labelKey: string; catKey: string }[] = [
+    { id: 'vec-add', labelKey: 'play_vec_add', catKey: 'play_vectors' },
+    { id: 'vec-dot', labelKey: 'play_vec_dot', catKey: 'play_vectors' },
+    { id: 'vec-scalar', labelKey: 'play_vec_scalar', catKey: 'play_vectors' },
+    { id: 'mat-add', labelKey: 'play_mat_add', catKey: 'play_matrices' },
+    { id: 'mat-mul', labelKey: 'play_mat_mul', catKey: 'play_matrices' },
+  ];
 
   const compute = () => {
     switch (op) {
@@ -73,9 +75,9 @@ export default function Playground() {
 
   return (
     <div>
-      <p className="font-mono text-xs text-primary mb-2">// playground</p>
-      <h1 className="text-3xl font-bold mb-2">Interactive Playground</h1>
-      <p className="text-muted-foreground mb-6">Modify values and see results instantly.</p>
+      <p className="font-mono text-xs text-primary mb-2">{t("play_comment")}</p>
+      <h1 className="text-3xl font-bold mb-2">{t("play_title")}</h1>
+      <p className="text-muted-foreground mb-6">{t("play_subtitle")}</p>
 
       <div className="flex flex-wrap gap-2 mb-6">
         {ops.map(o => (
@@ -83,14 +85,14 @@ export default function Playground() {
             className={`px-3 py-1.5 rounded-md text-xs font-mono transition-colors ${
               op === o.id ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
             }`}>
-            {o.cat}: {o.label}
+            {t(o.catKey)}: {t(o.labelKey)}
           </button>
         ))}
       </div>
 
       <div className="grid md:grid-cols-2 gap-4">
         <div className="bg-card border border-border rounded-lg p-5">
-          <h3 className="font-mono text-xs text-muted-foreground mb-3">// input</h3>
+          <h3 className="font-mono text-xs text-muted-foreground mb-3">{t("play_input")}</h3>
           {isVec ? (
             <>
               <VecInput label="Vector A" values={vecA} onChange={setVecA} />
@@ -114,7 +116,7 @@ export default function Playground() {
 
         <motion.div key={JSON.stringify(result)} initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }}
           className="bg-card border border-primary/30 rounded-lg p-5 glow-primary">
-          <h3 className="font-mono text-xs text-primary mb-3">// result</h3>
+          <h3 className="font-mono text-xs text-primary mb-3">{t("play_result")}</h3>
           <pre className="font-mono text-lg text-foreground">
             {typeof result === 'number' ? result : JSON.stringify(result, null, 2)}
           </pre>
