@@ -48,8 +48,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <span className="font-mono text-lg font-bold text-primary">LinAlg<span className="text-foreground">.dev</span></span>
           </div>
           <p className="text-xs text-muted-foreground mt-1">{t("nav_subtitle")}</p>
-          <div className="mt-3 hidden lg:block">
+          <div className="mt-3 hidden lg:flex gap-2 flex-wrap">
             <LanguageSelector />
+            <ThemeSelector />
           </div>
         </div>
         <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
