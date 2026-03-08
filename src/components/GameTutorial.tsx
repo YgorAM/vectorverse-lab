@@ -180,7 +180,7 @@ function LevelCards({ t }: { t: (k: string) => string }) {
 }
 
 export function GameTutorial({ onStart }: Props) {
-  const { t } = useI18n();
+  const { t, td } = useI18n();
   const [step, setStep] = useState(0);
 
   const steps = [
@@ -203,7 +203,7 @@ export function GameTutorial({ onStart }: Props) {
     },
     {
       title: t("tut_step3_title"),
-      desc: t("tut_step3_desc"),
+      desc: td("tut_step3_desc"),
       content: (
         <div className="flex justify-center">
           <Button size="sm" className="pointer-events-none">{t("game_check")}</Button>

@@ -126,7 +126,7 @@ function MatrixFillingAnimation({ matrix }: { matrix: number[][] }) {
 }
 
 export default function CodeConsole() {
-  const { t, locale } = useI18n();
+  const { t, td, locale } = useI18n();
   const [language, setLanguage] = useState<Language>('javascript');
   const [code, setCode] = useState(defaultCode.javascript);
   const [output, setOutput] = useState('');
@@ -319,7 +319,7 @@ export default function CodeConsole() {
               <span className="font-mono text-xs text-muted-foreground">{t("console_output")}</span>
             </div>
             <pre className="p-4 font-mono text-xs text-foreground min-h-[80px] whitespace-pre-wrap">
-              {output || t("console_placeholder")}
+              {output || td("console_placeholder")}
             </pre>
           </div>
 
