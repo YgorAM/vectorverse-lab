@@ -180,7 +180,7 @@ function LevelCards({ t }: { t: (k: string) => string }) {
 }
 
 export function GameTutorial({ onStart }: Props) {
-  const { t } = useI18n();
+  const { t, td } = useI18n();
   const [step, setStep] = useState(0);
 
   const steps = [
