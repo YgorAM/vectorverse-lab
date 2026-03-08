@@ -62,7 +62,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       `}>
         <div className="px-6 py-5 border-b border-border">
           <div className="flex items-center justify-between">
-            <span className="font-mono text-lg font-bold text-primary">LinAlg<span className="text-foreground">.dev</span></span>
+            <span className="font-mono text-lg font-bold text-primary flex items-center gap-2">▦ <span className="text-foreground">Matrix Academy</span></span>
           </div>
           <p className="text-xs text-muted-foreground mt-1">{t("nav_subtitle")}</p>
           <div className="mt-3 hidden lg:flex gap-2 flex-wrap">
