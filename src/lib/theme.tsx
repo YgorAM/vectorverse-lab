@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 
-export type Theme = "default-dark" | "midnight-blue" | "purple-matrix" | "light";
+export type Theme = "default-dark" | "midnight-blue" | "purple-matrix" | "light" | "matrix" | "github-dark" | "notion";
 
 interface ThemeContextType {
   theme: Theme;
