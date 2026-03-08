@@ -80,7 +80,7 @@ export default function Fundamentals() {
         <p className="text-muted-foreground mb-4">{t("fund_access_desc")}</p>
         <CodeBlock>{`v = [10, 20, 30]\nv[0]  → 10\nv[1]  → 20\nv[2]  → 30`}</CodeBlock>
         <div className="mt-4 bg-card border border-border rounded-lg p-4">
-          <p className="text-sm text-muted-foreground mb-2">{t("fund_access_try")}</p>
+          <p className="text-sm text-muted-foreground mb-2">{td("fund_access_try")}</p>
           <div className="flex gap-2">
             {[10, 20, 30].map((val, i) => (
               <div key={i} className="group relative">
