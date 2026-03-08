@@ -322,8 +322,10 @@ export const en: Record<string, string> = {
   // Console
   console_comment: "// console",
   console_title: "Code Console",
-  console_subtitle: "Write and run vector & matrix code.",
+  console_subtitle: "Write and run vector & matrix code. Load examples to learn step by step.",
   console_examples: "Examples",
+  console_beginner: "Beginner",
+  console_intermediate: "Operations",
   console_reset: "Reset",
   console_run: "Run",
   console_running: "Running...",
@@ -331,6 +333,11 @@ export const en: Record<string, string> = {
   console_placeholder: '// Click "Run" to execute your code',
   console_sim_warning: "⚠️ Only preloaded examples can be simulated.\nJavaScript code runs directly in the browser.\n\nTip: Load an example from the sidebar or Examples page.",
   console_no_output: "(no output)",
+  console_explain: "Explain Code",
+  console_line_explain: "Line-by-Line Explanation",
+  console_visual: "Visual Representation",
+  console_matrix_grid: "Matrix Grid",
+  console_fill_animation: "Filling Animation — watch the matrix being filled step by step",
 
   // Examples
   ex_comment: "// examples",
