@@ -347,6 +347,12 @@ export const en: Record<string, string> = {
   ex_output: "Output:",
 
   // Code example titles
+  ex_create_vector: "Create a Vector",
+  ex_create_matrix: "Create a 3×3 Matrix",
+  ex_access_elements: "Access Elements",
+  ex_fill_vector_loop: "Fill Vector (Loop)",
+  ex_fill_matrix_loops: "Fill Matrix (Loops)",
+  ex_print_matrix: "Print Matrix Values",
   ex_vector_addition: "Vector Addition",
   ex_vector_addition_desc: "Add two vectors component-wise",
   ex_dot_product: "Dot Product",

@@ -347,6 +347,12 @@ export const ptBR: Record<string, string> = {
   ex_output: "Saída:",
 
   // Code example titles
+  ex_create_vector: "Criar um Vetor",
+  ex_create_matrix: "Criar Matriz 3×3",
+  ex_access_elements: "Acessar Elementos",
+  ex_fill_vector_loop: "Preencher Vetor (Loop)",
+  ex_fill_matrix_loops: "Preencher Matriz (Loops)",
+  ex_print_matrix: "Imprimir Valores da Matriz",
   ex_vector_addition: "Adição de Vetores",
   ex_vector_addition_desc: "Some dois vetores componente a componente",
   ex_dot_product: "Produto Escalar",
