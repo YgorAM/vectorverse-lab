@@ -26,6 +26,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <I18nProvider>
+        <ThemeProvider>
         <BrowserRouter>
           <Layout>
             <Routes>
