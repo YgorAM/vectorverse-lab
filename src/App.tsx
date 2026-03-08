@@ -14,6 +14,7 @@ import MiniGame from "./pages/MiniGame";
 import Playground from "./pages/Playground";
 import CodeConsole from "./pages/CodeConsole";
 import Examples from "./pages/Examples";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
