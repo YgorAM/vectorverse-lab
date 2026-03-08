@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { I18nProvider } from "./lib/i18n";
+import { ThemeProvider } from "./lib/theme";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
 import Vectors from "./pages/Vectors";
@@ -25,6 +26,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <I18nProvider>
+        <ThemeProvider>
         <BrowserRouter>
           <Layout>
             <Routes>
@@ -42,6 +44,7 @@ const App = () => (
             </Routes>
           </Layout>
         </BrowserRouter>
+        </ThemeProvider>
       </I18nProvider>
     </TooltipProvider>
   </QueryClientProvider>

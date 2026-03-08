@@ -5,7 +5,8 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @layer base {
-  :root {
+  :root,
+  [data-theme="default-dark"] {
     --background: 220 20% 7%;
     --foreground: 210 20% 92%;
 
@@ -54,16 +55,153 @@
     --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   }
+
+  [data-theme="midnight-blue"] {
+    --background: 225 40% 8%;
+    --foreground: 210 25% 93%;
+
+    --card: 225 35% 11%;
+    --card-foreground: 210 25% 93%;
+
+    --popover: 225 35% 11%;
+    --popover-foreground: 210 25% 93%;
+
+    --primary: 190 90% 55%;
+    --primary-foreground: 225 40% 8%;
+
+    --secondary: 225 30% 16%;
+    --secondary-foreground: 210 25% 85%;
+
+    --muted: 225 25% 14%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 210 90% 60%;
+    --accent-foreground: 210 25% 95%;
+
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 225 25% 18%;
+    --input: 225 25% 18%;
+    --ring: 190 90% 55%;
+
+    --code-bg: 225 40% 5%;
+    --code-border: 225 25% 15%;
+    --success: 145 70% 45%;
+    --warning: 40 90% 55%;
+    --info: 200 80% 55%;
+
+    --sidebar-background: 225 40% 6%;
+    --sidebar-foreground: 210 20% 70%;
+    --sidebar-primary: 190 90% 55%;
+    --sidebar-primary-foreground: 225 40% 8%;
+    --sidebar-accent: 225 30% 13%;
+    --sidebar-accent-foreground: 210 25% 93%;
+    --sidebar-border: 225 25% 15%;
+    --sidebar-ring: 190 90% 55%;
+  }
+
+  [data-theme="purple-matrix"] {
+    --background: 270 30% 8%;
+    --foreground: 270 15% 93%;
+
+    --card: 270 25% 11%;
+    --card-foreground: 270 15% 93%;
+
+    --popover: 270 25% 11%;
+    --popover-foreground: 270 15% 93%;
+
+    --primary: 280 80% 65%;
+    --primary-foreground: 270 30% 8%;
+
+    --secondary: 270 22% 16%;
+    --secondary-foreground: 270 15% 85%;
+
+    --muted: 270 18% 14%;
+    --muted-foreground: 270 12% 55%;
+
+    --accent: 290 90% 65%;
+    --accent-foreground: 270 15% 95%;
+
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 270 20% 18%;
+    --input: 270 20% 18%;
+    --ring: 280 80% 65%;
+
+    --code-bg: 270 30% 5%;
+    --code-border: 270 20% 15%;
+    --success: 145 70% 45%;
+    --warning: 40 90% 55%;
+    --info: 200 80% 55%;
+
+    --sidebar-background: 270 30% 6%;
+    --sidebar-foreground: 270 12% 70%;
+    --sidebar-primary: 280 80% 65%;
+    --sidebar-primary-foreground: 270 30% 8%;
+    --sidebar-accent: 270 22% 13%;
+    --sidebar-accent-foreground: 270 15% 93%;
+    --sidebar-border: 270 20% 15%;
+    --sidebar-ring: 280 80% 65%;
+  }
+
+  [data-theme="light"] {
+    --background: 210 20% 96%;
+    --foreground: 220 20% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 12%;
+
+    --primary: 220 80% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 90%;
+    --secondary-foreground: 220 15% 30%;
+
+    --muted: 220 14% 92%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 230 70% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 14% 85%;
+    --input: 220 14% 85%;
+    --ring: 220 80% 50%;
+
+    --code-bg: 220 14% 93%;
+    --code-border: 220 14% 85%;
+    --success: 145 70% 35%;
+    --warning: 40 90% 45%;
+    --info: 200 80% 45%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 10% 40%;
+    --sidebar-primary: 220 80% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 94%;
+    --sidebar-accent-foreground: 220 20% 12%;
+    --sidebar-border: 220 14% 88%;
+    --sidebar-ring: 220 80% 50%;
+  }
 }
 
 @layer base {
   * {
     @apply border-border;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   code, pre, .font-mono {
