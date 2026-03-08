@@ -241,29 +241,36 @@ export default function MiniGame() {
 
   const handleRestart = () => {
     handleSelectLevel(activeDifficulty);
+    setPhase("playing");
+    startTimeRef.current = Date.now();
   };
 
   const handleBackToLevels = () => {
     setDifficulty(null);
-    setGameStarted(false);
+    setPhase("levels");
   };
 
   const handleSaveName = () => {
     setPlayerName(nameInput.trim());
   };
 
+  const handleTutorialDone = () => {
+    setPhase("playing");
+    startTimeRef.current = Date.now();
+  };
+
   // Tutorial
-  if (showTutorial) {
-    return <GameTutorial onStart={() => setShowTutorial(false)} />;
+  if (phase === "tutorial") {
+    return <GameTutorial onStart={handleTutorialDone} />;
   }
 
   // Level selector
-  if (!gameStarted) {
+  if (phase === "levels") {
     return <LevelSelector onSelect={handleSelectLevel} t={t} />;
   }
 
   // Completion
-  if (finished) {
+  if (phase === "finished" || finished) {
     return (
       <CompletionScreen
         difficulty={activeDifficulty}
