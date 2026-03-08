@@ -6,6 +6,12 @@ import { type Language, codeExamples } from "@/lib/codeExamples";
 import { useI18n } from "@/lib/i18n";
 
 const exampleKeys: Record<string, { title: string; desc: string }> = {
+  'create-vector': { title: 'ex_create_vector', desc: 'ex_vector_addition_desc' },
+  'create-matrix': { title: 'ex_create_matrix', desc: 'ex_matrix_multiplication_desc' },
+  'access-elements': { title: 'ex_access_elements', desc: 'ex_vector_addition_desc' },
+  'fill-vector-loop': { title: 'ex_fill_vector_loop', desc: 'ex_vector_addition_desc' },
+  'fill-matrix-loops': { title: 'ex_fill_matrix_loops', desc: 'ex_matrix_multiplication_desc' },
+  'print-matrix': { title: 'ex_print_matrix', desc: 'ex_matrix_multiplication_desc' },
   'vector-addition': { title: 'ex_vector_addition', desc: 'ex_vector_addition_desc' },
   'dot-product': { title: 'ex_dot_product', desc: 'ex_dot_product_desc' },
   'matrix-multiplication': { title: 'ex_matrix_multiplication', desc: 'ex_matrix_multiplication_desc' },
