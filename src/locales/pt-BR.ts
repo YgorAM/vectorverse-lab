@@ -262,6 +262,11 @@ export const ptBR: Record<string, string> = {
   game_type_mat_add: "Adição de Matrizes",
   game_type_mat_mul: "Multiplicação de Matrizes",
   game_identity_exp: "Multiplicar pela matriz identidade retorna a matriz original.",
+  game_best_score: "Seu Melhor Recorde",
+  game_new_record: "Novo Recorde!",
+  game_name_placeholder: "Seu nome...",
+  game_save_name: "Salvar",
+  game_reset_score: "Resetar Pontuação",
 
   // Vectors page
   vec_comment: "// vetores",
