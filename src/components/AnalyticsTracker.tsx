@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 // ID de medição do Google Analytics 4
-const GA_MEASUREMENT_ID = "G-TVL5BWZECL";
+const GA_MEASUREMENT_ID = "G-3Q8V4Q1T9W";
 
 // Declaração de tipos para o objeto gtag no window
 declare global {
