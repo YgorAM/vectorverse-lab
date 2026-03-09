@@ -33,6 +33,8 @@ const App = () => (
       <I18nProvider>
         <ThemeProvider>
         <BrowserRouter>
+          {/* AnalyticsTracker deve estar dentro do BrowserRouter para acessar useLocation */}
+          <AnalyticsTracker />
           <Layout>
             <Routes>
               <Route path="/" element={<Index />} />
